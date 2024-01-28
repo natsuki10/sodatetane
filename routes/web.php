@@ -32,4 +32,6 @@ use App\Http\Controllers\PostController;
 
 Route::resource('posts', PostController::class);
 
+Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
+
 require __DIR__.'/auth.php';

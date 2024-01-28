@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -55,13 +56,19 @@ class PostController extends Controller
 
         $post->update($validatedData);
 
-        return redirect()->route('posts.index');
+        return redirect()->route('posts.show', $post)->with('success', '投稿が更新されました！');
     }
-
+    
     public function destroy(Post $post)
     {
         $post->delete();
 
-        return redirect()->route('posts.index');
+        return redirect()->route('posts.index')->with('success', '投稿が削除されました！');
     }
+
+    public function show(Post $post)
+    {
+        return view('posts.show', compact('post'));
+    }
+
 }
