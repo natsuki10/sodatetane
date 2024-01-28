@@ -10,10 +10,10 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     @foreach ($posts as $post)
-                        <div>{{ $post->title }}</div>
+                    <a href="{{ route('posts.show', ['post' => $post]) }}">{{ $post->title }}</a>
+                        <!-- <div>{{ $post->title }}</div> -->
+                        <div>by: {{ $post->user->name }}</div>
                         <div>{{ $post->material }}</div>
-                        <div>ユーザ名: {{ $post->user->name }}</div>
-                        <div>ユーザID: {{ $post->user->id }}</div>
                         <div>{{ $post->created_at->format('Y-m-d H:i:s') }}</div>
                     @endforeach
                 </div>
