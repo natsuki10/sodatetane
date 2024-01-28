@@ -9,7 +9,8 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::all();
+        // $posts = Post::all();
+        $posts = Post::orderByDesc('created_at')->get();
         return view('posts.index', compact('posts'));
     }
 
@@ -25,11 +26,19 @@ class PostController extends Controller
             'material' => 'required|max:255'          
         ]);
 
+        $targetAges = $request->input('target_age');
+
+
         $post = new Post($validatedData);
         $post->user_id = Auth::id(); // ユーザーIDの設定
-        $post->save();
+        $post->title = $request->input('title');
+        $post->target_age = json_encode($request->input('target_age'));
+        $post->post_text = $request->input('post_text');
 
-        return redirect()->route('posts.index');
+        $post->save();
+        // dd($request->all());
+
+        return redirect()->route('posts.index')->with('success', 'Post created successfully!');
     }
 
     public function edit(Post $post)
