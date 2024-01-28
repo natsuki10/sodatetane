@@ -6,12 +6,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 
-class YourModel extends Model
-{
-    protected $fillable = ['title', 'material', 'target_age', 'image', 'comment'];
-}
+// class YourModel extends Model
+// {
+//     protected $fillable = ['title', 'material', 'target_age', 'image', 'comment'];
+// }
 class Post extends Model
 {
+    protected $fillable = ['title', 'material', 'target_age', 'image', 'post_text'];
+    protected $casts = ['target_age' => 'array',];
+
     public function user()
     {
         return $this->belongsTo(User::class);

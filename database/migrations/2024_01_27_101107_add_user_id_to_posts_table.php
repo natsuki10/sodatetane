@@ -11,14 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('posts', function (Blueprint $table) {
-            $table->id();
-            $table->string('title');
-            $table->integer('target_age');
-            $table->string('material');
-            $table->longText('post_text');
-            $table->timestamps();
+         Schema::table('posts', function (Blueprint $table) {
+            $table->unsignedBigInteger('user_id')->after('id'); // 'id' カラムの後に追加
+            $table->foreign('user_id')->references('id')->on('users');
         });
+        
     }
 
     /**
@@ -26,6 +23,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('posts');
+        Schema::table('posts', function (Blueprint $table) {
+            //
+        });
     }
 };
