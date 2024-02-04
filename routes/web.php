@@ -29,9 +29,10 @@ Route::middleware('auth')->group(function () {
 });
 
 use App\Http\Controllers\PostController;
-
 Route::resource('posts', PostController::class);
-
 Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
+
+use App\Http\Controllers\LikeController;
+Route::post('/posts/{post}/likes', [LikeController::class, 'store'])->name('posts.likes.store')->middleware('auth');
 
 require __DIR__.'/auth.php';

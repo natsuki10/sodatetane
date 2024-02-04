@@ -18,9 +18,21 @@
                             <img src="{{ $post->image_url }}" alt="投稿画像" class="post-image">
                         @endif
                         <div>{{ $post->created_at->format('Y-m-d H:i:s') }}</div>
+                        <!-- いいねボタン -->
+                        @if (Auth::check())
+                            <form action="{{ route('posts.likes.store', $post) }}" method="POST">
+                                @csrf
+                                <button type="submit">{{ $post->likes->count() }}♡</button>
+                            </form>
+                        @else
+                            <span>{{ $post->likes->count() }}♡</span>
+                        @endif
                     @endforeach
                 </div>
             </div>
         </div>
     </div>
 </x-app-layout>
+
+<script src="{{ asset('js/like-push.js') }}"></script>
+
