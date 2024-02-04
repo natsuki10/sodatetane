@@ -11,9 +11,12 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     @foreach ($posts as $post)
                     <a href="{{ route('posts.show', ['post' => $post]) }}">{{ $post->title }}</a>
-                        <!-- <div>{{ $post->title }}</div> -->
                         <div>by: {{ $post->user->name }}</div>
                         <div>{{ $post->material }}</div>
+                        <p>{{ $post->post_text }}</p>
+                        @if ($post->image_url)
+                            <img src="{{ $post->image_url }}" alt="投稿画像" class="post-image">
+                        @endif
                         <div>{{ $post->created_at->format('Y-m-d H:i:s') }}</div>
                     @endforeach
                 </div>

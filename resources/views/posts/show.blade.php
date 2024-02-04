@@ -12,9 +12,16 @@
                     <h1>{{ $post->title }}</h1>
                     <p>{{ $post->material }}</p>
                     <p>対象年齢: 
-                        @foreach(json_decode($post->target_age) as $age)
+                    @php
+                    $targetAges = json_decode($post->target_age);
+                    @endphp
+                    @if($targetAges && is_array($targetAges))
+                        @foreach($targetAges as $age)
                             {{ $age }}歳
                         @endforeach
+                    @else
+                        対象年齢が存在していません
+                    @endif
                     </p>
                     <p>投稿内容: {{ $post->post_text }}</p>
                     <p>投稿者: {{ $post->user->name }}</p>

@@ -1,0 +1,19 @@
+#drop-area {
+    border: 2px dashed #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+}
+
+#drop-area.is-dragover {
+    background-color: #f0f0f0; /* ドラッグ中の背景色 */
+    border: 2px dashed #000; /* ドラッグ中のボーダースタイル */
+}
+
+/* 画像サイズの調節 */
+.post-image {
+    width: 355px; /* 幅を355pxに設定 */
+    height: 220px; /* 高さを120pxに設定 */
+    object-fit: cover; /* 画像がコンテナに収まるように調整 */
+}
