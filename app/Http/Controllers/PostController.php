@@ -3,8 +3,10 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Post;
+use App\Models\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -24,23 +26,41 @@ class PostController extends Controller
     {
         $validatedData = $request->validate([
             'title' => 'required|max:255',
-            'material' => 'required|max:255'          
+            'material' => 'required|max:255',
+            'image' => 'required|image', // 画像が必須であることを確認
         ]);
 
-        $targetAges = $request->input('target_age');
+        // 画像のアップロードとURLの取得
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('images', 'public');
+            $imageUrl = Storage::url($imagePath);
+        } else {
+            $imageUrl = ''; // 画像がアップロードされなかった場合のデフォルト値
+        }
 
-
-        $post = new Post($validatedData);
-        $post->user_id = Auth::id(); // ユーザーIDの設定
-        $post->title = $request->input('title');
-        $post->target_age = json_encode($request->input('target_age'));
+        // 投稿データの保存
+        $post = new Post;
+        $post->user_id = Auth::id();
+        $post->title = $validatedData['title'];
+        $post->material = $validatedData['material'];
+        $post->target_age = json_encode($request->input('target_age')); // target_age が配列の場合、JSONにエンコード
         $post->post_text = $request->input('post_text');
-
+        $post->image_url = $imageUrl;
         $post->save();
-        // dd($request->all());
 
         return redirect()->route('posts.index')->with('success', 'Post created successfully!');
     }
+
+        // 投稿データと画像URLの保存
+        // Post::create([
+        //     'title' => $request->title,
+        //     'material' => $request->material,
+        //     'post_text' => $request->post_text,
+        //     'image_url' => $imageUrl,
+        //     'user_id' => auth()->id(),
+        // ]);
+        
+    
 
     public function edit(Post $post)
     {

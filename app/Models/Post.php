@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
+use App\Models\Image;
+use App\Models\PostImage;
 
 // class YourModel extends Model
 // {
@@ -12,8 +14,7 @@ use App\Models\User;
 // }
 class Post extends Model
 {
-    protected $fillable = ['title', 'material', 'target_age', 'image', 'post_text'];
-    protected $casts = ['target_age' => 'array',];
+    protected $fillable = ['title', 'material', 'target_age', 'post_text','image_url','user_id'];
 
     public function user()
     {
