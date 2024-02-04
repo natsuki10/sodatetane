@@ -17,3 +17,13 @@
     height: 220px; /* 高さを120pxに設定 */
     object-fit: cover; /* 画像がコンテナに収まるように調整 */
 }
+
+.like-button {
+    cursor: pointer;
+    font-size: 24px;
+    color: #ccc; /* いいねされていない状態の色 */
+}
+
+.like-button.liked {
+    color: red; /* いいねされた状態の色 */
+}
