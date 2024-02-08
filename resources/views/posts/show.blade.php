@@ -10,6 +10,7 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <h1>{{ $post->title }}</h1>
+                    <p>投稿者: {{ $post->user->name }}</p>
                     <p>{{ $post->material }}</p>
                     <p>対象年齢: 
                     @php
@@ -24,7 +25,9 @@
                     @endif
                     </p>
                     <p>投稿内容: {{ $post->post_text }}</p>
-                    <p>投稿者: {{ $post->user->name }}</p>
+                    @if ($post->image_url)
+                            <img src="{{ $post->image_url }}" alt="投稿画像" class="post-image">
+                        @endif
                     <p>投稿日時: {{ $post->created_at->format('Y-m-d H:i:s') }}</p>
                 @if(Auth::user() && Auth::user()->id === $post->user_id)
                     <a href="{{ route('posts.edit', $post) }}">編集</a>
