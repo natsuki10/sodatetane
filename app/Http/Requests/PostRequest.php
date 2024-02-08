@@ -11,7 +11,7 @@ class PostRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -26,6 +26,7 @@ class PostRequest extends FormRequest
             'material' => 'required|max:255',
             'target_age' => 'required',
             'post_text' => 'required',
+            'image' => 'required|image', 
         ];
     }
 
@@ -36,6 +37,7 @@ class PostRequest extends FormRequest
             'material' => '255字以内で入力してください。',
             'target_age' => '1つ以上選んでください。',
             'post_text' => '必ず入力してください',
+            'image' => '写真は必須です', 
         ];
     }
 }
