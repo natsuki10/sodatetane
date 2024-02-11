@@ -56,12 +56,16 @@ class PostController extends Controller
         Log::info('Received new post request', $request->all());
         
         // 画像のアップロードとURLの取得
+        $imageUrl = null;
         if ($request->hasFile('image')) {
+            Log::info('Image file received.');
             $imagePath = $request->file('image')->store('images', 'public');
             $imageUrl = Storage::url($imagePath);
+            Log::info('Image stored: ' . $imageUrl);
         } else {
-            $imageUrl = ''; // 画像がアップロードされなかった場合のデフォルト値
+            Log::info('No image file received.');
         }
+        
 
         // 投稿データの保存
         try {
