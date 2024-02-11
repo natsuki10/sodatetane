@@ -3,7 +3,7 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Post;
-use App\Models\Image;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -113,8 +113,9 @@ class PostController extends Controller
         return redirect()->route('posts.index')->with('success', '投稿が削除されました！');
     }
 
-    public function show(Post $post)
+    public function show($id)
     {
+        $post = Post::with('comments.user')->findOrFail($id);
         return view('posts.show', compact('post'));
     }
 

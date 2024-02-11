@@ -26,30 +26,45 @@
 
                     <!-- 投稿 -->
                     @foreach ($posts as $post)
-                    <a href="{{ route('posts.show', ['post' => $post]) }}">{{ $post->title }}</a>
-                        <div>by: {{ $post->user->name }}</div>
-                        <div>{{ $post->material }}</div>
-                        <!-- 対象年齢の表示 -->
-                        @php
-                            $decodedAges = json_decode($post->target_age, true);
-                        @endphp
-                        @if(is_array($decodedAges))
-                            {{ implode('歳 ', $decodedAges) }}歳
-                        @endif
-                        <div>{{ $post->post_text }}</div>
-                        @if ($post->image_url)
-                            <img src="{{ $post->image_url }}" alt="投稿画像" class="post-image">
-                        @endif
-                        <div>{{ $post->created_at->format('Y-m-d H:i:s') }}</div>
+                        <div class="post-item">
+                            <a href="{{ route('posts.show', ['post' => $post]) }}" class="post-link">
+                                <div>
+                                    <span class="post-title">{{ $post->title }}</span>
+                                </div>
+                                <div>by: {{ $post->user->name }}</div>
+                                <div>{{ $post->material }}</div>
+                                <!-- 対象年齢の表示 -->
+                                @php
+                                    $decodedAges = json_decode($post->target_age, true);
+                                @endphp
+                                @if(is_array($decodedAges))
+                                    <div>対象年齢: {{ implode('歳 ', $decodedAges) }}歳</div>
+                                @endif
+                                <div>{{ $post->post_text }}</div>
+                                @if ($post->image_url)
+                                    <img src="{{ $post->image_url }}" alt="投稿画像" class="post-image">
+                                @endif
+                                <div>{{ $post->created_at->format('Y-m-d H:i:s') }}</div>
+                            </a>
+                        </div>
                         <!-- いいねボタン -->
-                        @if (Auth::check())
-                            <form action="{{ route('posts.likes.store', $post) }}" method="POST">
-                                @csrf
-                                <button type="submit" class="like-button">{{ $post->likes->count() }}♡</button>
-                            </form>
-                        @else
-                            <span>{{ $post->likes->count() }}♡</span>
-                        @endif
+                        <div class="like-button">
+                            @if (Auth::check())
+                                <form action="{{ route('posts.likes.store', $post) }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="like-button">{{ $post->likes->count() }}<img src="{{ asset('storage/icons/ハート.svg') }}" alt="heart" width="24" height="24"></button>
+                                </form>
+                            @else
+                                <span>{{ $post->likes->count() }}♡</span>
+                            @endif
+                        </div>
+                        <!-- コメントアイコン -->
+                        <div class="comment-icon">
+                            <a href="{{ route('posts.show', $post->id) }}">
+                            <img src="{{ asset('storage/icons/吹き出し.svg') }}" alt="Comment" width="24" height="24">
+                            {{ $post->comments->count() }}
+                            </a>
+                        </div>
                     @endforeach
                 </div>
             </div>

@@ -29,14 +29,36 @@
                             <img src="{{ $post->image_url }}" alt="投稿画像" class="post-image">
                         @endif
                     <p>投稿日時: {{ $post->created_at->format('Y-m-d H:i:s') }}</p>
-                @if(Auth::user() && Auth::user()->id === $post->user_id)
-                    <a href="{{ route('posts.edit', $post) }}">編集</a>
-                    <form method="POST" action="{{ route('posts.destroy', $post) }}">
+
+                    <!-- 編集削除 -->
+                    @if(Auth::user() && Auth::user()->id === $post->user_id)
+                        <a href="{{ route('posts.edit', $post) }}">編集</a>
+                        <form method="POST" action="{{ route('posts.destroy', $post) }}">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit">削除</button>
+                        </form>
+                    @endif
+
+                    <!-- コメントフォーム -->
+                    @auth
+                    <form action="{{ route('comments.store', ['post' => $post->id]) }}" method="POST">
                         @csrf
-                        @method('DELETE')
-                        <button type="submit">削除</button>
+                        <input type="hidden" name="post_id" value="{{ $post->id }}">
+                        <textarea name="comment_text" class="form-control" placeholder="コメントを入力"></textarea>
+                        <button type="submit" class="btn btn-primary mt-2">コメント送信</button>
                     </form>
-                @endif
+                    @endauth
+                    <!-- コメント一覧 -->
+                    <div class="comments mt-4">
+                        <h3>コメント</h3>
+                        @foreach($post->comments as $comment)
+                            <div class="comment mb-2">
+                                <strong>{{ $comment->user->name }}:</strong>
+                                <p>{{ $comment->comment_text }}</p>
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>
