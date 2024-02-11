@@ -14,41 +14,30 @@
                         @method('PUT')
                         <div class="form-group">
                             <label for="title">タイトル</label>
-                            <input type="text" class="form-control" id="title" name="title">
+                            <input type="text" class="form-control" id="title" name="title" value="{{ $post->title }}">
                         </div>
                         <div class="form-group">
                             <label for="material">材料</label>
-                            <input type="text" class="form-control" id="material" name="material">
+                            <input type="text" class="form-control" id="material" name="material" value="{{ $post->material }}">
                         </div>
+
+                        <!-- 対象年齢のチェックボックスを選択済みにする -->
+                        @php
+                            $targetAges = json_decode($post->target_age, true);
+                        @endphp
                         <div class="form-group">
                             <label for="target_age">対象年齢</label>
                             <div class="form-group">
-                                <input type="checkbox" id="age0" name="target_age[]" value="0">
-                                <label for="age0">0歳</label><br>
-
-                                <input type="checkbox" id="age1" name="target_age[]" value="1">
-                                <label for="age1">1歳</label><br>
-
-                                <input type="checkbox" id="age2" name="target_age[]" value="2">
-                                <label for="age2">2歳</label><br>
-
-                                <input type="checkbox" id="age3" name="target_age[]" value="3">
-                                <label for="age3">3歳</label><br>
-
-                                <input type="checkbox" id="age4" name="target_age[]" value="4">
-                                <label for="age4">4歳</label><br>
-
-                                <input type="checkbox" id="age5" name="target_age[]" value="5">
-                                <label for="age5">5歳</label><br>
-
-                                <input type="checkbox" id="age6" name="target_age[]" value="6">
-                                <label for="age6">6歳以上</label>
+                                @foreach(range(0, 6) as $age)
+                                    <input type="checkbox" id="age{{ $age }}" name="target_age[]" value="{{ $age }}"
+                                        {{ in_array($age, $targetAges) ? 'checked' : '' }}>
+                                    <label for="age{{ $age }}">{{ $age }}歳</label><br>
+                                @endforeach
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="post_text">コメント</label>
-                            <textarea class="form-control" id="post_text" name="post_text"></textarea><br>                      
-                            <button type="submit">更新</button>
+                            <textarea class="form-control" id="post_text" name="post_text">{{ $post->post_text }}</textarea>                            <button type="submit">更新</button>
                     </form>
                 </div>
             </div>
