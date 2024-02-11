@@ -34,4 +34,7 @@ Route::resource('posts', PostController::class);
 use App\Http\Controllers\LikeController;
 Route::post('/posts/{post}/likes', [LikeController::class, 'store'])->name('posts.likes.store')->middleware('auth');
 
+use App\Http\Controllers\CommentController;
+Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('comments.store')->middleware('auth');
+
 require __DIR__.'/auth.php';
