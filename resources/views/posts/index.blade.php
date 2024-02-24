@@ -11,61 +11,28 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     
                     <!-- 検索機能 -->
-                    <form action="{{ route('posts.index') }}" method="GET">
-                        <div>
-                            <input type="text" name="search" placeholder="キーワード検索">
+                    <div class="mb-6">
+                        <form action="{{ route('posts.index') }}" method="GET">
+                            <div>
+                                <input type="text" name="search" placeholder="キーワード検索">
+                            </div>
+                            <div class="flex">
+                            <div>
+                                対象年齢:
+                                @foreach(range(0, 6) as $age)
+                                    <input type="checkbox" name="target_age[]" value="{{ $age }}"> {{ $age }}歳
+                                @endforeach
+                            </div>
+                            <button class="ml-5 relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-red-200 via-red-300 to-yellow-200 group-hover:from-red-200 group-hover:via-red-300 group-hover:to-yellow-200 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400">
+                            <span class="relative px-2 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                                検索
+                            </span>                            
                         </div>
-                        <div>
-                            対象年齢:
-                            @foreach(range(0, 6) as $age)
-                                <input type="checkbox" name="target_age[]" value="{{ $age }}"> {{ $age }}歳
-                            @endforeach
-                        </div>
-                        <button type="submit">検索</button>
-                    </form>
+                        </form>
+                    </div>
 
                     <!-- 投稿 -->
-                    @foreach ($posts as $post)
-                        <div class="post-item">
-                            <a href="{{ route('posts.show', ['post' => $post]) }}" class="post-link">
-                                <div>
-                                    <span class="post-title">{{ $post->title }}</span>
-                                </div>
-                                <div>by: {{ $post->user->name }}</div>
-                                <div>{{ $post->material }}</div>
-                                <!-- 対象年齢の表示 -->
-                                @php
-                                    $decodedAges = json_decode($post->target_age, true);
-                                @endphp
-                                @if(is_array($decodedAges))
-                                    <div>対象年齢: {{ implode('歳 ', $decodedAges) }}歳</div>
-                                @endif
-                                <div>{{ $post->post_text }}</div>
-                                @if ($post->image_url)
-                                    <img src="{{ $post->image_url }}" alt="投稿画像" class="post-image">
-                                @endif
-                                <div>{{ $post->created_at->format('Y-m-d H:i:s') }}</div>
-                            </a>
-                        </div>
-                        <!-- いいねボタン -->
-                        <div class="like-button">
-                            @if (Auth::check())
-                                <form action="{{ route('posts.likes.store', $post) }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="like-button">{{ $post->likes->count() }}<img src="{{ asset('storage/icons/ハート.svg') }}" alt="heart" width="24" height="24"></button>
-                                </form>
-                            @else
-                                <span>{{ $post->likes->count() }}♡</span>
-                            @endif
-                        </div>
-                        <!-- コメントアイコン -->
-                        <div class="comment-icon">
-                            <a href="{{ route('posts.show', $post->id) }}">
-                            <img src="{{ asset('storage/icons/吹き出し.svg') }}" alt="Comment" width="24" height="24">
-                            {{ $post->comments->count() }}
-                            </a>
-                        </div>
-                    @endforeach
+                    <x-post-card :posts="$posts" />
                 </div>
             </div>
         </div>

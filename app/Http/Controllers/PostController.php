@@ -15,6 +15,8 @@ class PostController extends Controller
     public function index(Request $request)
 {
     $query = Post::query();
+    $posts = Post::orderBy('created_at', 'desc')->paginate(6);
+    return view('posts.index', compact('posts'));
 
     // キーワード検索
     if ($request->filled('search')) {
@@ -44,7 +46,7 @@ class PostController extends Controller
     $posts = $query->orderByDesc('created_at')->get();
 
     return view('posts.index', compact('posts'));
-}
+    }
 
     public function create()
     {
@@ -98,7 +100,8 @@ class PostController extends Controller
     {
         $validatedData = $request->validate([
             'title' => 'required|max:255',
-            'material' => 'required|max:255'
+            'material' => 'required|max:255',
+            'post_text' => 'required',
         ]);
 
         $post->update($validatedData);
