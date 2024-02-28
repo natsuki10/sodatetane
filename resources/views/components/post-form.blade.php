@@ -44,7 +44,7 @@
             <input type="file" class="form-control" id="image" name="image" style="display:none;">
             <div id="drop-area">
                 <p>ファイルをドラッグ&ドロップまたは
-                <span class="file-upload-link"><button class="flex mx-auto text-white bg-green-500 border-0 py-1 px-4 focus:outline-none hover:bg-green-700 rounded text-sm">選択</button></span></p>
+                <span class="file-upload-link"><button id="file-upload-button" class="flex mx-auto text-white bg-green-500 border-0 py-1 px-4 focus:outline-none hover:bg-green-700 rounded text-sm">選択</button></span></p>
             </div>                            
         </div>
 

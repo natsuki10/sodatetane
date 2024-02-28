@@ -1,8 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
     var fileInput = document.getElementById('image');
     var dropArea = document.getElementById('drop-area');
+    var fileUploadButton = document.getElementById('file-upload-button'); // 「選択」ボタンのID
 
-    // ファイルのプレビュー表示のコード
+    // ファイルのプレビュー表示の関数
     function displayImagePreview(file) {
         var reader = new FileReader();
         reader.onload = function(e) {
@@ -19,6 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
         reader.readAsDataURL(file);
     }
 
+    // ファイルが選択されたときのイベント
     fileInput.addEventListener('change', function(event) {
         var files = event.target.files;
         if (files.length > 0) {
@@ -26,6 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    // ドラッグ&ドロップイベント
     dropArea.addEventListener('dragover', function(event) {
         event.preventDefault();
         event.stopPropagation();
@@ -51,10 +54,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    var fileUploadLink = document.querySelector('.file-upload-link');
-    if (fileUploadLink) {
-        fileUploadLink.addEventListener('click', function() {
-            document.getElementById('image').click();
+    // 「選択」ボタンのイベント
+    if (fileUploadButton) {
+        fileUploadButton.addEventListener('click', function(e) {
+            console.log('File upload button clicked');
+            e.preventDefault(); // フォーム送信を防ぐ
+            e.stopPropagation(); // イベントの伝播を停止
+            fileInput.click(); // ファイル選択ダイアログを開く
         });
     }
 });
