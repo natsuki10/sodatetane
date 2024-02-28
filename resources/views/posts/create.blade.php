@@ -15,6 +15,3 @@
         </div>
     </div>
 </x-app-layout>
-
-<script src="{{ asset('js/drop-upload.js') }}"></script>
-
