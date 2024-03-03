@@ -22,4 +22,13 @@ class LikeController extends Controller
 
     return back();
 }
+
+public function index()
+{
+    $userId = Auth::id(); 
+    $likes = Like::where('user_id', $userId)->with('post')->paginate(10); 
+
+    return view('posts.likes.index', compact('likes'));
+}
+
 }

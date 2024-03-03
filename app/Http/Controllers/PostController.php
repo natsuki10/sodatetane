@@ -53,6 +53,14 @@ class PostController extends Controller
         return view('posts.create');
     }
 
+    public function myPosts()
+    {
+    $userId = Auth::id(); // 現在認証されているユーザーのIDを取得
+    $posts = Post::where('user_id', $userId)->orderBy('created_at', 'desc')->paginate(10); // ユーザーIDに基づいて投稿を取得
+
+    return view('posts.my_posts', compact('posts')); // ビューに投稿を渡す
+    }
+
     public function store(Request $request)
     {
         Log::info('Received new post request', $request->all());
