@@ -53,6 +53,14 @@
                                                 this.closest('form').submit();">
                                 {{ __('Log Out') }}
                             </x-dropdown-link>
+
+                            <x-dropdown-link :href="route('posts.my_posts')">
+                                {{ __('マイ投稿') }}
+                                </x-dropdown-link>
+                            <x-dropdown-link :href="route('likes.index')">
+                                {{ __('いいねした投稿') }}
+                                </x-dropdown-link>
+
                         </form>
                     </x-slot>
                 </x-dropdown>

@@ -14,4 +14,8 @@ class Like extends Model
     {
         return $this->hasMany(Like::class);
     }
+    public function post()
+    {
+        return $this->belongsTo(Post::class, 'post_id'); // 'post_id'はLikeテーブルにあるPostの外部キーを指定
+    }
 }
