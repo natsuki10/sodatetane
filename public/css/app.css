@@ -15,3 +15,12 @@
     filter: grayscale(0%);
 }
 
+.liked-heart {
+    fill: red; /* いいね済みの場合の色 */
+}
+
+.unliked-heart {
+    fill: grey; /* 未いいねの場合の色 */
+}
+
+
