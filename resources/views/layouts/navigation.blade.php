@@ -16,11 +16,15 @@
                         {{ __('そだてたねとは') }}
                     </x-nav-link>
                     <x-nav-link :href="route('posts.index')" :active="request()->routeIs('posts.index')">
-                        投稿一覧
+                    {{ __('投稿一覧') }}
                     </x-nav-link>
                     <x-nav-link :href="route('posts.create')" :active="request()->routeIs('posts.create')">
-                        新規投稿
+                    {{ __('新規投稿') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('chat_gpt-index')" :active="request()->routeIs('chat_gpt-index')">
+                        {{ __('AIに相談') }}
+                    </x-nav-link>
+
                 </div>
             </div>
 
@@ -56,7 +60,7 @@
 
                             <x-dropdown-link :href="route('posts.my_posts')">
                                 {{ __('マイ投稿') }}
-                                </x-dropdown-link>
+                            </x-dropdown-link>
                             <x-dropdown-link :href="route('likes.index')">
                                 {{ __('いいねした投稿') }}
                                 </x-dropdown-link>
@@ -89,6 +93,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('posts.create')" :active="request()->routeIs('posts.create')">
                 {{ __('新規投稿') }}
+            <x-responsive-nav-link :href="route('chat_gpt-index')" :active="request()->routeIs('chat_gpt-index')">
+                {{ __('AIに相談') }}
+            </x-responsive-nav-link>
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('posts.my_posts')" :active="request()->routeIs('posts.my_posts')">
                 {{ __('マイ投稿') }}

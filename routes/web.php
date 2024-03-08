@@ -40,4 +40,9 @@ Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name
 Route::get('/myposts', [PostController::class, 'myPosts'])->middleware('auth')->name('posts.my_posts');
 Route::get('/my-likes', [LikeController::class, 'index'])->name('likes.index')->middleware('auth');
 
+use App\Http\Controllers\ChatGptController;
+
+Route::get('/chat', [ChatGptController::class, 'index'])->name('chat_gpt-index');
+Route::post('/chat', [ChatGptController::class, 'chat'])->name('chat_gpt-chat');
+
 require __DIR__.'/auth.php';
