@@ -1,3 +1,22 @@
+## Name:baby_chick:
+そだてたね
+
+## About:baby_bottle:
+保育士や幼稚園教諭、乳幼児の保護者などの子どもに関わるユーザを対象にし、<br>
+子どもに関する制作アイディアを掲示板形式で投稿、閲覧できるアプリです。<br>
+ChatGPTのAPIを使用し、AIに保育のアイディアを相談できる機能もあります。
+
+## Document:artist:
+[機能要件](https://docs.google.com/spreadsheets/d/1a2kwtcbefeAPg9NgvOOm56OdWq2P5daCnowlQan2dfQ/edit?usp=sharing)
+
+[ワイヤーフレーム](https://www.figma.com/file/ljzMRFtxoiZdISunz03Vef/%E3%81%9D%E3%81%A0%E3%81%A6%E3%81%9F%E3%81%AD_%E3%83%AF%E3%82%A4%E3%83%A4%E3%83%BC%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0?type=design&node-id=0%3A1&mode=design&t=sxcmpaFxZlPCs7wV-1)
+
+[テーブル設計図](https://docs.google.com/spreadsheets/d/1NI7N84UpuJzMc2Igm2B5JFjg3q36iCfrFnahShnMmNQ/edit?usp=sharing
+)
+
+[ER図](https://docs.google.com/spreadsheets/d/1mIpjKKtrIqoWjHyoOjsUJBnvZhD8nRtEUvxgrYGD62I/edit?usp=sharing)
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
