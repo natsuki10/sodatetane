@@ -1,12 +1,12 @@
-## Name:baby_chick:
+## Name
 そだてたね
 
-## About:baby_bottle:
+## About
 保育士や幼稚園教諭、乳幼児の保護者などの子どもに関わるユーザを対象にし、<br>
 子どもに関する制作アイディアを掲示板形式で投稿、閲覧できるアプリです。<br>
 ChatGPTのAPIを使用し、AIに保育のアイディアを相談できる機能もあります。
 
-## Document:artist:
+## Document
 [機能要件](https://docs.google.com/spreadsheets/d/1a2kwtcbefeAPg9NgvOOm56OdWq2P5daCnowlQan2dfQ/edit?usp=sharing)
 
 [ワイヤーフレーム](https://www.figma.com/file/ljzMRFtxoiZdISunz03Vef/%E3%81%9D%E3%81%A0%E3%81%A6%E3%81%9F%E3%81%AD_%E3%83%AF%E3%82%A4%E3%83%A4%E3%83%BC%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0?type=design&node-id=0%3A1&mode=design&t=sxcmpaFxZlPCs7wV-1)
